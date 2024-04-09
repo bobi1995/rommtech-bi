@@ -7,8 +7,6 @@ import ErrorModal from "../components/Error";
 import PaginationBar from "../components/PagginationBar";
 
 const OrderPage = () => {
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
   const [orders, setOrders] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [page, setPage] = useState(1);
@@ -17,6 +15,9 @@ const OrderPage = () => {
   const endIndex = Math.min(startIndex + pageSize, orders.flat().length);
 
   const itemRef = useRef<HTMLInputElement>(null);
+
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fetchData = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

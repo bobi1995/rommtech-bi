@@ -1,6 +1,8 @@
 import cors from "cors";
 import express from "express";
 import orderRouter from "./src/routes/orderRoute";
+import itemRouter from "./src/routes/itemRoute";
+import empRoute from "./src/routes/employeeRoute";
 
 const app = express();
 
@@ -13,6 +15,9 @@ app.use((req, res, next) => {
 app.options("*", cors());
 
 app.use("/order", orderRouter);
+app.use("/item", itemRouter);
+app.use("/emp", empRoute);
+
 app.get("/", (req, res) => {
   console.log("working....");
   return res.send("working");

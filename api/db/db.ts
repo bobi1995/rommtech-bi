@@ -1,6 +1,10 @@
 const timeout = 120_000_000;
 
 const localDB = {
+  user: "sa",
+  password: "!Qaz2wsx",
+  server: "192.168.0.82",
+  database: "BG1000",
   port: 1433,
   options: {
     encrypt: false,
