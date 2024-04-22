@@ -2,6 +2,7 @@ export const getAverageItemTime = (employee?: string) => `WITH Averages AS (
     SELECT 
         [orders].[Item No_] AS ItemNo,
         [item].[Description],
+        [routes].[Operation No_] as OpNo,
         [item].[Description 2] AS Description2,
         AVG(CASE 
                 WHEN [orders].[Output Quantity] <> 0 THEN [orders].[Invoiced Quantity] / [orders].[Output Quantity] 
@@ -25,7 +26,7 @@ export const getAverageItemTime = (employee?: string) => `WITH Averages AS (
     ) routes ON routes.[Operation No_] = orders.[Operation No_]
     LEFT JOIN [BG1000].[dbo].[ISS Original$Item] item ON orders.[Item No_] = item.No_
     WHERE orders.[No_] = '${employee}'    AND CAST(orders.[Posting Date] AS DATE) > '2022-01-01' 
-    GROUP BY [orders].[Item No_], [item].[Description], [item].[Description 2]
+    GROUP BY [orders].[Item No_], [item].[Description], [item].[Description 2],[routes].[Operation No_]
 )
 SELECT *
 FROM Averages
@@ -34,6 +35,6 @@ ORDER BY AverageCoef DESC;
 `;
 
 export const getAllEmployees = () => `select No_,Name
-from [Copy_ISS250324$Machine Center]
+from [ISS Original$Machine Center]
 where Blocked=0
 order by Name;`;
