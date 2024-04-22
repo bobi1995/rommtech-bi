@@ -1,4 +1,4 @@
-import { useState, useRef, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { getAverageItemTime, getAllEmployees } from "../db/hooks/employee";
 import Loader from "../components/Loader";
 import ErrorModal from "../components/Error";

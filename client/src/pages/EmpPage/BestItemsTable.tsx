@@ -5,6 +5,7 @@ const BestItemsTable = ({ data, title, type }: any) => {
   if (!data || data.length === 0) {
     return <div>Няма данни.</div>;
   }
+  console.log(data);
   return (
     <div className="mt-10">
       <h2 className="text-center font-bold text-lg">{title}</h2>
@@ -14,6 +15,7 @@ const BestItemsTable = ({ data, title, type }: any) => {
             <thead>
               <tr className="bg-gray-800 text-white">
                 <th className="border border-gray-600 px-4 py-2">Артикул</th>
+                <th className="border border-gray-600 px-4 py-2">Оп.</th>
 
                 <th className="border border-gray-600 px-4 py-2">Описание</th>
                 <th className="border border-gray-600 px-4 py-2">Описание 2</th>
@@ -32,7 +34,9 @@ const BestItemsTable = ({ data, title, type }: any) => {
                   <td className="border border-gray-600 px-4 py-2">
                     {row.ItemNo}
                   </td>
-
+                  <td className="border border-gray-600 px-4 py-2">
+                    {row.OpNo}
+                  </td>
                   <td className="border border-gray-600 px-4 py-2">
                     {row.Description}
                   </td>

@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import MenuBar from "../components/MenuBar";
 import ItemPage from "../pages/ItemPage";
-import Home from "../pages/HomePage";
 import OrderStatusPage from "../pages/OrderPage/OrderStatusPage";
 import EmployeesPage from "../pages/EmployeesPage";
 import ExitPage from "../pages/ExitPage";

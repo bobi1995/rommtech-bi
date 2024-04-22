@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ErrorModal = ({ error }: { error: string }) => {
   const [open, setOpen] = useState(true);
@@ -6,7 +6,10 @@ const ErrorModal = ({ error }: { error: string }) => {
     <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded shadow-lg relative">
         <div className="absolute top-0 right-0">
-          <button className="px-3 py-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+          <button
+            className="px-3 py-2 text-gray-700 hover:text-gray-900 focus:outline-none"
+            onClick={() => setOpen(false)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"

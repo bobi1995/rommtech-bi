@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-const navClass = "pt-3 pb-3 pl-3 font-bold text-lg min w-9/12 ";
-const activeNavClass = "bg-main-globalbg rounded-xl  rounded-r-none";
+//import { useLocation } from "react-router-dom";
+//const navClass = "pt-3 pb-3 pl-3 font-bold text-lg min w-9/12 ";
+//const activeNavClass = "bg-main-globalbg rounded-xl  rounded-r-none";
 const MenuBar: React.FC = () => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
-  let location = useLocation();
-  const pathname = location.pathname;
+  //let location = useLocation();
+  //const pathname = location.pathname;
   const toggleSubMenu = () => {
     setIsSubMenuOpen(!isSubMenuOpen);
   };
