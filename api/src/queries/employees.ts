@@ -37,4 +37,4 @@ ORDER BY AverageCoef DESC;
 export const getAllEmployees = () => `select No_,Name
 from [ISS Original$Machine Center]
 where Blocked=0
-order by Name;`;
+order by No_;`;

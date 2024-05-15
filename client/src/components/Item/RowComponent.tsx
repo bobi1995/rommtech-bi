@@ -3,7 +3,7 @@ interface TableRowProps {
   field: string;
   value: string | number;
 }
-const OrderRow = ({ row }: any) => {
+const RowComponent = ({ row }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
     setIsOpen(true);
@@ -89,4 +89,4 @@ const TableRow: React.FC<TableRowProps> = ({ field, value }) => {
   );
 };
 
-export default OrderRow;
+export default RowComponent;

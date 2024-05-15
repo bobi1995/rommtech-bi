@@ -1,6 +1,6 @@
 import { useState, useRef, FormEvent } from "react";
 
-const OrderFilter = ({
+const FilterComponent = ({
   orders,
   setFiltered,
 }: {
@@ -11,7 +11,6 @@ const OrderFilter = ({
   const invoicedDateFromRef = useRef<HTMLInputElement>(null); // Ref for start date
   const invoicedDateToRef = useRef<HTMLInputElement>(null); // Ref for end date
   const opRef = useRef<HTMLInputElement>(null);
-  const empRef = useRef<HTMLInputElement>(null);
   const [selectedEmployee, setSelectedEmployee] = useState<string>("");
 
   const getUniqueValuesForKey = (array: any[]) => {
@@ -32,6 +31,7 @@ const OrderFilter = ({
   };
 
   const uniqueEmployees = getUniqueValuesForKey(orders);
+  console.log(uniqueEmployees);
 
   const filterOrders = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const OrderFilter = ({
     ) {
       if (order) {
         filteredOrders = filteredOrders.filter((row: any) =>
-          row.OrderNo.includes(order)
+          row.OrderNo.includes(order.toUpperCase())
         );
       }
       if (invoicedDateFrom && invoicedDateTo) {
@@ -146,7 +146,7 @@ const OrderFilter = ({
         </div>
         <div className="mb-4 text-center">
           <label
-            className="block text-gray-700 text-lg font-bold mb-2 mr-5"
+            className="block text-gray-700 text-sm font-bold mb-2 mr-5"
             htmlFor="item"
           >
             Служител
@@ -160,7 +160,7 @@ const OrderFilter = ({
             <option value="">Избери служител</option>
             {uniqueEmployees.map((employee, index) => (
               <option key={index} value={employee.EmpNo}>
-                {employee.EmpName}
+                {employee.EmpNo} / {employee.EmpName}
               </option>
             ))}
           </select>
@@ -197,4 +197,4 @@ const OrderFilter = ({
   );
 };
 
-export default OrderFilter;
+export default FilterComponent;

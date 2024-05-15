@@ -1,18 +1,11 @@
 import { useState, useRef, FormEvent } from "react";
 import { getItemById } from "../db/hooks/item";
-import OrderTable from "./ItemPage/OrderTable";
-import OrderFilter from "./ItemPage/OrderFilter";
 import Loader from "../components/Loader";
 import ErrorModal from "../components/Error";
-import PaginationBar from "../components/PagginationBar";
+import ItemDisplayComponent from "../components/Item/ItemDisplayComponent";
 
 const OrderPage = () => {
   const [orders, setOrders] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [page, setPage] = useState(1);
-  const pageSize = 20;
-  const startIndex = (page - 1) * pageSize;
-  const endIndex = Math.min(startIndex + pageSize, orders.flat().length);
 
   const itemRef = useRef<HTMLInputElement>(null);
 
@@ -25,7 +18,6 @@ const OrderPage = () => {
     try {
       const response = await getItemById(itemRef.current?.value);
       setOrders(response);
-      setFiltered(response);
     } catch (error) {
       console.log(error);
       setError("Възникна грешка, моля рестартирайте системата.");
@@ -64,16 +56,8 @@ const OrderPage = () => {
         </div>
       </form>
       {orders && orders.length > 0 ? (
-        <OrderFilter orders={orders.flat()} setFiltered={setFiltered} />
-      ) : null}
-      {filtered && filtered.length > 0 ? (
         <>
-          <OrderTable data={filtered.flat().slice(startIndex, endIndex)} />
-          <PaginationBar
-            currentPage={page}
-            totalPages={Math.ceil(filtered.flat().length / pageSize)}
-            onPageChange={setPage}
-          />
+          <ItemDisplayComponent data={orders.flat()} />
         </>
       ) : null}
     </div>

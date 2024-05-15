@@ -68,7 +68,7 @@ const EmployeesPage = () => {
               <option value="">Избери служител</option>
               {employees.map((employee, index) => (
                 <option key={index} value={employee.No_}>
-                  {employee.Name}
+                  {employee.No_} / {employee.Name}
                 </option>
               ))}
             </select>
