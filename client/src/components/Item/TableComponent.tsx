@@ -15,12 +15,11 @@ function calculateAverageProductionTime(data: any) {
     (sum: any, obj: any) => sum + obj["OutputQuantity"],
     0
   );
-  const averageProductionTime =
-    totalInvQuantity / totalOutputQuantity / data.length;
+  const averageProductionTime = totalInvQuantity / totalOutputQuantity;
   return averageProductionTime.toFixed(2);
 }
 
-const TableComponent = ({ data, orders }: any) => {
+const TableComponent = ({ data }: any) => {
   if (!data || data.length === 0) {
     return <div>Няма данни.</div>;
   }
