@@ -1,11 +1,12 @@
 import { useState, FormEvent, useEffect } from "react";
 import { getAverageItemTime, getAllEmployees } from "../db/hooks/employee";
 import Loader from "../components/Loader";
-import ErrorModal from "../components/Error";
 import BestItemsTable from "./EmpPage/BestItemsTable";
+import { useErrorBoundary } from "react-error-boundary";
 
 const EmployeesPage = () => {
-  const [error, setError] = useState<string>("");
+  const { showBoundary } = useErrorBoundary();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [items, setItems] = useState([]);
   const [employees, setEmployees] = useState<{ Name: string; No_: string }[]>(
@@ -17,9 +18,13 @@ const EmployeesPage = () => {
     const fetchEmployees = async () => {
       try {
         const employeeData = await getAllEmployees();
+        if (employeeData.response && employeeData.response.status === 401) {
+          showBoundary(new Error("Неуторизиран достъп"));
+          return;
+        }
         setEmployees(employeeData.flat());
       } catch (error) {
-        setError("Възникна грешка при зареждане на служителите.");
+        showBoundary(error);
       }
     };
 
@@ -40,7 +45,7 @@ const EmployeesPage = () => {
       const response = await getAverageItemTime(selectedEmployee);
       setItems(response);
     } catch (error) {
-      setError("Възникна грешка, моля рестартирайте системата.");
+      showBoundary(error);
     } finally {
       setLoading(false);
     }
@@ -48,7 +53,6 @@ const EmployeesPage = () => {
   return (
     <div>
       {loading ? <Loader loading={loading} /> : null}
-      {error ? <ErrorModal error={error} /> : null}
 
       <form onSubmit={fetchData}>
         <div>

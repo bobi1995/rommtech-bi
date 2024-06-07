@@ -18,7 +18,7 @@ export const getAverageItemTime = (empId?: string) => {
 
 export const getAllEmployees = () => {
   return axios
-    .get(`${db_url}/emp/emp`, {
+    .get(`${db_url}/emp/all`, {
       headers: {
         "Access-Control-Allow-Origin": "*",
       },

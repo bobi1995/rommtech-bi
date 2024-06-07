@@ -2,6 +2,7 @@ import express from "express";
 import mssql from "mssql";
 import localDB from "../../db/db";
 import { getAllEmployees, getAverageItemTime } from "../queries/employees";
+import { verify } from "../helper/verify";
 
 const empRoute = express.Router();
 
@@ -22,7 +23,7 @@ empRoute.get("/", async (req, res) => {
   } else res.send([]);
 });
 
-empRoute.get("/emp", async (req, res) => {
+empRoute.get("/all", async (req, res) => {
   try {
     const pool = await mssql.connect(localDB);
     const query = getAllEmployees();
