@@ -5,7 +5,7 @@ import OrderStatusPage from "../pages/OrderPage/OrderStatusPage";
 import EmployeesPage from "../pages/EmployeesPage";
 import ExitPage from "../pages/ExitPage";
 import LoginPage from "../pages/LoginPage";
-import OnTimePage from "../pages/OnTimePage";
+import EmpItemPage from "../pages/EmpItemPage";
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 import ManagePage from "../pages/ManagePage";
 
@@ -67,22 +67,22 @@ const mainRouter = createBrowserRouter([
       },
 
       {
-        path: "/order",
+        path: "/emp",
         children: [
           {
-            path: "status",
-            element: <OrderStatusPage />,
+            path: "time",
+            element: <EmployeesPage />,
             index: true,
           },
           {
-            path: "ontime",
-            element: <OnTimePage />,
+            path: "stats",
+            element: <EmpItemPage />,
           },
         ],
       },
       {
-        path: "/emp",
-        element: <EmployeesPage />,
+        path: "/order",
+        element: <OrderStatusPage />,
       },
       {
         path: "/manage",

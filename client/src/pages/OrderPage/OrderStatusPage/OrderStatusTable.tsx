@@ -6,6 +6,14 @@ const OrderStatusTable = ({ data }: any) => {
   }
   return (
     <div className="overflow-x-auto mt-5">
+      <div className="m-auto flex justify-center gap-16 mb-5 ">
+        <p>
+          Изделие: <b>{data[0].ItemDesc}</b>
+        </p>
+        <p>
+          Количество на поръчката:<b>{data[0].FinalQuantity}</b>
+        </p>
+      </div>
       <table className="table-auto border-collapse border border-gray-800 text-xs m-auto">
         <thead>
           <tr className="bg-gray-800 text-white">

@@ -50,6 +50,7 @@ const EmployeesPage = () => {
       setLoading(false);
     }
   };
+
   return (
     <div>
       {loading ? <Loader loading={loading} /> : null}

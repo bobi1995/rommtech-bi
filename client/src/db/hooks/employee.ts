@@ -30,3 +30,18 @@ export const getAllEmployees = () => {
       return error;
     });
 };
+
+export const getEmpItems = (empId?: string) => {
+  return axios
+    .get(`${db_url}/emp/items?empId=${empId}`, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

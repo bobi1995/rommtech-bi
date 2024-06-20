@@ -30,7 +30,7 @@ const BestItemsTable = ({ data, title, type }: any) => {
             </thead>
             <tbody>
               {data.map((row: any) => (
-                <tr key={row.ItemNo}>
+                <tr key={row.ItemNo + row.AverageCoef}>
                   <td className="border border-gray-600 px-4 py-2">
                     {row.ItemNo}
                   </td>

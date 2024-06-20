@@ -1,4 +1,5 @@
 /api/node_modules
 /client/node_modules
+/api/db/lite/db.sqlite3
 
 next-bi-rommtech

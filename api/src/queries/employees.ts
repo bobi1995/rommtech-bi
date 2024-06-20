@@ -38,3 +38,26 @@ export const getAllEmployees = () => `select No_,Name
 from [ISS Original$Machine Center]
 where Blocked=0
 order by No_;`;
+
+export const getEmployeeProduction = (emp: string) => `select 
+ORDERS.[Posting Date] as InvoicedDate
+,ORDERS.[Document No_] as PrdOrder
+,ORDERS.[Item No_] as ItemNumber
+,ITEM.[Description] as ItemDesc
+,ORDERS.[Operation No_] as OpNo
+,ROUTING.[Description] as OpDesc
+,ORDERS.[Invoiced Quantity] as OpTime
+,ORDERS.[Output Quantity] as ProdQuantity
+,CASE 
+ WHEN ORDERS.[Output Quantity] <> 0 THEN ORDERS.[Invoiced Quantity] / ORDERS.[Output Quantity] 
+ ELSE 0 
+END AS Reached
+,ROUTING.[Run Time] as SetTime
+,CASE 
+ WHEN ROUTING.[Run Time] <> 0 and [Output Quantity] <>0 THEN ([Invoiced Quantity] / [Output Quantity] ) / ROUTING.[Run Time]
+ ELSE 0 
+END AS Coef
+FROM [BG1000].[dbo].[ISS Original$Capacity Ledger Entry] ORDERS 
+LEFT JOIN [BG1000].[dbo].[ISS Original$Item] ITEM ON ORDERS.[Item No_] = ITEM.No_
+LEFT JOIN [BG1000].[dbo].[ISS Original$Routing Line] ROUTING on ROUTING.[Routing No_] = ITEM.[Routing No_]
+WHERE ORDERS.[No_] = '${emp}'`;
