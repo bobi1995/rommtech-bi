@@ -59,5 +59,5 @@ END AS Reached
 END AS Coef
 FROM [BG1000].[dbo].[ISS Original$Capacity Ledger Entry] ORDERS 
 LEFT JOIN [BG1000].[dbo].[ISS Original$Item] ITEM ON ORDERS.[Item No_] = ITEM.No_
-LEFT JOIN [BG1000].[dbo].[ISS Original$Routing Line] ROUTING on ROUTING.[Routing No_] = ITEM.[Routing No_]
+LEFT JOIN [BG1000].[dbo].[ISS Original$Routing Line] ROUTING on ROUTING.[Routing No_] = ORDERS.[Routing No_] and ORDERS.[Operation No_]=ROUTING.[Operation No_]
 WHERE ORDERS.[No_] = '${emp}'`;

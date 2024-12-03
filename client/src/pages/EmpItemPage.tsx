@@ -3,6 +3,7 @@ import { getAllEmployees, getEmpItems } from "../db/hooks/employee";
 import Loader from "../components/Loader";
 import { useErrorBoundary } from "react-error-boundary";
 import TableEmpItem from "./EmpItemPage/TableEmpItem";
+import Select from "react-select";
 
 interface Item {
   PrdOrder: string;
@@ -96,10 +97,8 @@ const EmpItemPage = () => {
     setFiltered(results);
   }, [from, due, order, opNo, itemName]);
 
-  const handleEmployeeSelect = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setSelectedEmployee(event.target.value);
+  const handleEmployeeSelect = (selectedOption: any) => {
+    setSelectedEmployee(selectedOption ? selectedOption.value : "");
   };
 
   const fetchData = async (e: FormEvent<HTMLFormElement>) => {
@@ -122,6 +121,15 @@ const EmpItemPage = () => {
     }
   };
 
+  const employeeOptions = employees.map((employee) => ({
+    value: employee.No_,
+    label: `${employee.No_} / ${employee.Name}`,
+  }));
+
+  const selectedOption = employeeOptions.find(
+    (option) => option.value === selectedEmployee
+  );
+
   return (
     <div>
       {loading ? <Loader loading={loading} /> : null}
@@ -135,19 +143,15 @@ const EmpItemPage = () => {
             >
               Служител
             </label>
-            <select
-              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            <Select
+              className="w-96 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline m-auto"
               id="employee"
               onChange={handleEmployeeSelect}
-              value={selectedEmployee}
-            >
-              <option value="">Избери служител</option>
-              {employees.map((employee, index) => (
-                <option key={index} value={employee.No_}>
-                  {employee.No_} / {employee.Name}
-                </option>
-              ))}
-            </select>
+              value={selectedOption}
+              options={employeeOptions}
+              placeholder="Избери служител"
+              isClearable
+            />
           </div>
           <div className="text-center">
             <input
